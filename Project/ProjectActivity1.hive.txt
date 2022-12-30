@@ -1,0 +1,10 @@
+CREATE TABLE activityfiles (line STRING);
+LOAD DATA LOCAL INPATH '/root/Activities/episodeIV_dialouges.txt' INTO TABLE activityfiles;
+LOAD DATA LOCAL INPATH '/root/Activities/episodeV_dialouges.txt' INTO TABLE activityfiles;
+LOAD DATA LOCAL INPATH '/root/Activities/episodeVI_dialouges.txt' INTO TABLE activityfiles;
+
+CREATE TABLE speech_count AS
+SELECT name, count(1) AS count FROM
+(SELECT split(line, '\t')[0] AS name FROM activityFiles) n
+GROUP BY n.name
+ORDER BY count DESC;
