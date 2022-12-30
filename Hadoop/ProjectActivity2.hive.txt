@@ -1,0 +1,9 @@
+CREATE TABLE prjFiles (line STRING);
+
+LOAD DATA LOCAL INPATH '/root/Activities/episodeIV_dialouges.txt' INTO TABLE prjFiles;
+
+
+CREATE TABLE ProjectActy AS
+SELECT 'LUKE' as name, count(1) AS count FROM
+(SELECT split(line, '\t')[1] AS speech FROM prjFiles) s
+WHERE s.speech LIKE '%Luke%' ;
